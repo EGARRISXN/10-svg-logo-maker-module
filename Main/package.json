@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/EGARRISXN/svg-logo-maker-module-10#readme",
   "devDependencies": {
-    "jest": "^29.5.0"
+    "jest": "^24.9.0"
   },
   "dependencies": {
     "inquirer": "^8.2.4"
