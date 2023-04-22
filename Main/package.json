@@ -1,0 +1,33 @@
+{
+  "name": "svg-logo-maker-module-10",
+  "version": "1.0.0",
+  "description": "svg logo maker project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EGARRISXN/svg-logo-maker-module-10.git"
+  },
+  "keywords": [
+    "svg",
+    "logo",
+    "maker",
+    "github",
+    "module",
+    "10"
+  ],
+  "author": "Ethan Garrison",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EGARRISXN/svg-logo-maker-module-10/issues"
+  },
+  "homepage": "https://github.com/EGARRISXN/svg-logo-maker-module-10#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
