@@ -1,3 +1,4 @@
+//Shape class and the function to set the color
 class Shape {
     constructor(color) {
         this.color = color;
@@ -7,16 +8,29 @@ class Shape {
     }
 }
 
+//Circle class
 class Circle extends Shape {
     render() {
-        /*
-        Return a string that represents a circle element, using literals to pass color.
-        */
+        //Returning the circle element with color
+        return `<circle cx='150' cy='115' r='80' fill='${this.color}'/>`;
     }
 }
 
-/* 
-Create a Triangle and Square class that extends the Shape Class
-*/
+//Triangle class
+class Triangle extends Shape {
+    render() {
+        //Returning the triangle element with color
+        return `<polygon points='150, 18 244, 182 56, 182' fill='${this.color}'/>`;
+    }
+}
 
-module.exports = { Cirlce, Triangle, Square };
+//Square class
+class Square extends Shape {
+    render() {
+        //Returning the Square element with color
+        return `<rect x="73" y="40" width="160" height="160" fill="${this.color}"/>`;
+    }
+}
+
+//Exports the classes
+module.exports = { Circle, Triangle, Square };

@@ -1,12 +1,11 @@
    const inquirer = require('inquirer');
+   const fs = require("fs");
 
    class CLI {
     run() {
         return inquirer
         .prompt([
-            /*
-            Prompt the use for the specs they want to display in the SVG
-            */
+
         ])
         .then(({ text, textColor, shapeType, shapeColor }) => {
             /*
