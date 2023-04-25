@@ -1,4 +1,4 @@
-//Shape class and the function to set the color
+//Defining the shape class with a color function
 class Shape {
     constructor(color) {
         this.color = color;
@@ -32,5 +32,5 @@ class Square extends Shape {
     }
 };
 
-//Exports the classes
-module.exports = { Circle, Triangle, Square }
+//Exports the Shape classes
+module.exports = { Circle, Triangle, Square };
