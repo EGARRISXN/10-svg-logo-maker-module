@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const { Circle, Triangle, Square } = require('../Main/lib/shape.js');
 
-//Defining an SVG class with constructors
+// Defining a SVG class with constructors
 class SVG {
   constructor() {
     this.textE = '';
@@ -14,7 +14,7 @@ class SVG {
   }
 
   setText(text, color) {
-    this.textE = `<text x='150' y='130' text-anchor='middle' font-size='40' fill='${color}'>${text}</text>`;
+    this.textE = `<g><text x='150' y='130' text-anchor='middle' font-size='40' fill='${color}'>${text}</text></g>`;
   }
 
   setShape(shape) {
@@ -22,7 +22,7 @@ class SVG {
   }
 }
 
-//Writing data to the file
+// Writing data to the file
 function writeToFile(fileName, svg) {
   fs.writeFile(fileName, svg, (err) => {
     if (err) {
@@ -33,36 +33,35 @@ function writeToFile(fileName, svg) {
   });
 }
 
-//Array of prompts
+// Array of prompts
 function promptUser() {
-  inquirer
-    .prompt([
-      //Text Prompt
-      {
-        type: 'input',
-        message: 'Choose your text. (Max three characters)',
-        name: 'text',
-      },
-      // Text color prompt
-      {
-        type: 'input',
-        message: 'Choose text color. (Enter color keyword or hexadecimal number)',
-        name: 'textColor',
-      },
-      // Shape prompt
-      {
-        type: 'list',
-        message: 'Choose your shape.',
-        choices: ['Circle', 'Triangle', 'Square'],
-        name: 'shape',
-      },
-      // Shape color prompt
-      {
-        type: 'input',
-        message: 'Choose shape color (Enter color keyword or hexadecimal number)',
-        name: 'shapeColor',
-      },
-    ])
+  inquirer.prompt([
+    // Text Prompt
+    {
+      type: 'input',
+      message: 'Choose your text. (Max three characters)',
+      name: 'text',
+    },
+    // Text color prompt
+    {
+      type: 'input',
+      message: 'Choose text color. (Enter color keyword or hexadecimal number)',
+      name: 'textColor',
+    },
+    // Shape prompt
+    {
+      type: 'list',
+      message: 'Chose your shape.',
+      choices: ['Circle', 'Triangle', 'Square'],
+      name: 'shape',
+    },
+    // Shape color prompt
+    {
+      type: 'input',
+      message: 'Choose shape color (Enter color keyword or hexadecimal number)',
+      name: 'shapeColor',
+    },
+  ])
     .then((prompts) => {
       if (prompts.text.length > 3) {
         console.log('Cannot exceed three letters.');
