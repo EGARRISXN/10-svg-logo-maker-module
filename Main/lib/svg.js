@@ -1,18 +1,35 @@
+//SVG class and the function to create the text
 class SVG {
     constructor() {
         this.textElement = '';
         this.shapeElement = '';
     }
+}
 
-    /*
-    Research how to create an SVG file
+function writeToFile(fileName, answers) {
 
-    Create a render method that returns a string that represents an SVG file with our passed in elements
+//Sets the width and height of the container
+let svg = '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
 
-    Create a setText method that takes in a message and a color and sets the textElement property to a string that represents a text element, using literals to pass in the message and color
+// <g> wraps the text so it appears on top
+svg += '<g>';
 
-    We need to create a setShape method that takes in a shape and sets the shapeElement property to the shape's render method
-    */
+// Takes user input for shape choice and inserts it into SVG file
+svg += `${answers.shape}`;
+
+// Text edits
+svg += `<text x='150' y='130' text-anchor='middle' font-size='40' fill='${answers.textColor}'>'${answers.text}'</text>`;
+
+// Closing </g> tag
+svg += '</g>';
+
+// Closing </svg> tag
+svg += '</svg>';
+
+fs.writeFile(fileName, svg, (err) => {
+    err ? console.log(err) : console.log('Generated logo.svg');
+})
+
 }
 
 module.exports = SVG;

@@ -1,5 +1,5 @@
 //Importing these classes from the shapes folder
-const { Circle, Triangle, Square } = require('../lib/shape.js');
+const { Circle, Triangle, Square } = require('../Main/lib/shape.js');
 
 //Testing to see a circle with a blue background
 describe('Circle test', () => {
