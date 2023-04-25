@@ -2,84 +2,93 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const { Circle, Triangle, Square } = require('../Main/lib/shape.js');
 
-function writeToFile(fileName, answers) {
-    
-    let svg = '';
+//Defining an SVG class with constructors
+class SVG {
+  constructor() {
+    this.textE = '';
+    this.shapeE = '';
+  }
 
-    //Sets the width and height of the container
-    svg = '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
-    
-    // Opening tag that sets text on top
-    svg += '<g>';
-    
-    // Takes user input for shape choice and inserts it into SVG file
-    svg += `${answers.shape}`;
+  render() {
+    return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.textE}${this.shapeE}</svg>`;
+  }
 
-    let shape;
-    if (answers.shape === 'Circle') {
-        shape = new Circle();
-        svg += `<circle cx='150' cy='115' r='80' fill='${answers.shapeColor}'/>`;
-    } else if (answers.shape === 'Square') {
-        shape = new Triangle();
-        svg += `<polygon points='150, 18 244, 182 56, 182' fill='${answers.shapeColor}'/>`;
-    } else {
-        shape = new Square();
-        svg += `<rect x='90' y='40' width='160' height='160' fill='${answers.shapeColor}'/>`;
-    }
-    
-    // Text edits
-    svg += `<text x='150' y='130' text-anchor='middle' font-size='40' fill='${answers.textColor}'>'${answers.text}'</text>`;
-    
-    // Closing tag
-    svg += '</g>';
-    
-    // Closing tag
-    svg += '</svg>';
-    
-    fs.writeFile(fileName, svg, (err) => {
-        err ? console.log(err) : console.log('Generated logo.svg');
-    });
+  setText(text, color) {
+    this.textE = `<text x='150' y='130' text-anchor='middle' font-size='40' fill='${color}'>${text}</text>`;
+  }
+
+  setShape(shape) {
+    this.shapeE = shape.render();
+  }
 }
 
+//Writing data to the file
+function writeToFile(fileName, svg) {
+  fs.writeFile(fileName, svg, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('logo.svg has been generated!');
+    }
+  });
+}
+
+//Array of prompts
 function promptUser() {
-    inquirer
-        .prompt([
-        //Text Prompt
-        {
+  inquirer
+    .prompt([
+      //Text Prompt
+      {
         type: 'input',
-        message:
-            'Choose your text. (Max three characters)',
+        message: 'Choose your text. (Max three characters)',
         name: 'text',
-        },
-        // Text color prompt
-        {
+      },
+      // Text color prompt
+      {
         type: 'input',
-        message:
-            'Choose text color. (Enter color keyword or hexadecimal number)',
+        message: 'Choose text color. (Enter color keyword or hexadecimal number)',
         name: 'textColor',
-        },
-        // Shape prompt
-        {
+      },
+      // Shape prompt
+      {
         type: 'list',
-        message: 'Chose your shape.',
+        message: 'Choose your shape.',
         choices: ['Circle', 'Triangle', 'Square'],
         name: 'shape',
-        },
-        // Shape color prompt
-        {
+      },
+      // Shape color prompt
+      {
         type: 'input',
-        message:
-            'Choose shape color (Enter color keyword or hexadecimal number)',
+        message: 'Choose shape color (Enter color keyword or hexadecimal number)',
         name: 'shapeColor',
-        },
+      },
     ])
-    .then(({ text, textColor, shape, shapeColor }) => {
-        if (text.length > 3) {
-            console.log('Must not exceed three letters.');
-            promptUser();
+    .then((prompts) => {
+      if (prompts.text.length > 3) {
+        console.log('Cannot exceed three letters.');
+        promptUser();
+      } else {
+        let svg = new SVG();
+        svg.setText(prompts.text, prompts.textColor);
+
+        let shape;
+        if (prompts.shape === 'Circle') {
+          shape = new Circle();
+          svg.setShape(shape);
+          svg.shapeE += `<circle cx='150' cy='115' r='80' fill='${prompts.shapeColor}'/>`;
+        } else if (prompts.shape === 'Triangle') {
+          shape = new Triangle();
+          svg.setShape(shape);
+          svg.shapeE += `<polygon points='150, 18 244, 182 56, 182' fill='${prompts.shapeColor}'/>`;
         } else {
-            writeToFile('logo.svg', answers);
+          shape = new Square();
+          svg.setShape(shape);
+          svg.shapeE += `<rect x='90' y='40' width='160' height='160' fill='${prompts.shapeColor}'/>`;
         }
+
+        writeToFile('logo.svg', svg.render());
+      }
     });
 }
+
 promptUser();
