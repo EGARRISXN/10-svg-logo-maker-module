@@ -16,8 +16,6 @@
 
  [Credits](#credits)
 
- [Usage-Information](#usage-information)
-
  [Test-Instructions](#test-instructions)
 
  [License](#license)
@@ -59,12 +57,6 @@ Inquirer
 ## Credits
 
 I worked with all my classmates to execute this.
-
-## Usage Information
-
-To run this application, use the command line to navigate to the directory of the application, install all dependencies (npm i), then type the command node index.js. You will then be taken through a series of questions. Once all questions have been answered properly, a message will display to the command line telling you your logo has been generated. Find your new logo in the newly generated SVG file.
-
-For unit testing instructions, navigate to the Test Instructions section.
 
 ## Test Instructions
 
