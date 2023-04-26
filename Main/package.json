@@ -4,7 +4,7 @@
   "description": "svg logo maker project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "10"
   ],
   "author": "Ethan Garrison",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/EGARRISXN/svg-logo-maker-module-10/issues"
   },
@@ -28,6 +28,7 @@
     "jest": "^24.9.0"
   },
   "dependencies": {
-    "inquirer": "^8.2.5"
+    "inquirer": "^8.2.5",
+    "save-dev": "^0.0.1-security"
   }
 }
